@@ -1,0 +1,62 @@
+{% extends 'basicdesign.html' %}
+{% load static %}
+{% block 'title' %} SHOW ITEM {% endblock %}
+{% block 'slider' %}
+<section id="inner-headline">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<h2 class="pageTitle">Product Details</h2>
+			</div>
+		</div>
+	</div>
+	</section>
+	{% if request.session.cart_disp_count %}
+		<div class="container">
+			<br><br>
+			<div class="row">
+				<div class="col-lg-12">
+					<table border="1" class="table table-default stripped">
+						<tr>
+							<th>IMAGES</th>
+							<th>NAME</th>
+							<th>PRICE</th>
+							<th>QUANTITY</th>
+						</tr>
+						{% for element in all_cart %}
+						<tr>
+							{% for key,value in element.items %}
+							<td><img src="{{value.0}}" style="height: 50px;width: 50px;"></td>
+							<td>{{value.1}}</td>
+							<td>{{value.2}}</td>
+							<td>{{value.3}}</td>
+							<td><a class="btn" href="remove/{{key}}">Remove</a></td>
+							{% endfor %}
+					</tr>
+						{% endfor %}
+					</table>
+
+				</div>
+			</div>
+
+		<div class="row">
+			<div class="col-lg-8"></div>
+			<div class="col-lg-4">
+				<div class="panel panel-warning">
+					<div class="panel-body">
+						<h2>Gross Table :  {{request.session.totalAmount}}/-</h2><br>
+
+						<a href="/checkout" class="btn" style="background-color: #ab150a;color:white">Procceed</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+				{% else %}
+				<div class="container text-center">
+					<br><h1>Cart is Empty</h1><br><br>
+				</div>
+				{% endif %}
+				
+		
+{% endblock %}

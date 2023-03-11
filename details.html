@@ -1,0 +1,71 @@
+{% extends 'basicdesign.html' %}
+{% load static %}
+{% block 'title' %} SHOW ITEM {% endblock %}
+{% block 'slider' %}
+<section id="inner-headline">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<h2 class="pageTitle">Product Details</h2>
+			</div>
+		</div>
+	</div>
+	</section>
+	<section id="content">
+
+	<div class="container">
+
+		<div class="row ">
+			<div class="col-lg-6" >
+				<img class="img-responsive" src="{{records.product_image_set.all.0.img.url}}" style="height:400px" alt="">
+				{% for item_pic in records.product_image_set.all %}
+				<div style="height: 80px;width: 90px;display: inline-block">
+					<a href=""><img src="{{item_pic.img.url}}" alt="" class="img_responsive" style="height: 80px;width: 70px;">
+				</a>
+
+				</div>
+				
+				{% endfor %}
+			</div>
+
+			<div class="col-md-1"></div>
+			<div class="col-lg-5">
+				
+				<center>
+					<h2>{{records.pname}}</h2>
+				</center>
+				<h2>Rs {{records.price}}</h2>
+					<br>
+				<p>{{records.s_decr}}<p><br><br>
+					<h2>QUANTITTY</h2>
+				<form action="/Cart" method="post">
+					{% csrf_token %}
+					<center>
+
+						<select name="quantity" class="form-control">
+						<option> 1</option>
+						<option>2</option>
+						<option>3</option>
+					</select>
+						
+					<br><br><br>
+
+					<input type="hidden" name="slug" value="{{records.slug}}">
+					<button type="button" class="btn btn-warning">
+						<i class="fa fa-flash" style="font-size:18px;">BUY NOW</i>
+					</button>
+
+					
+
+					<button type="submit" class="btn btn-warning">
+						<i class="fa fa-shopping-cart" style="font-size:18px;">ADD TO CART</i>
+					</button>
+				</center>
+				</form>
+
+
+				
+			</div>
+		</div>
+	</div>
+{% endblock %}

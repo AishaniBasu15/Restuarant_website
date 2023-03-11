@@ -1,0 +1,43 @@
+{% extends 'basicdesign.html' %}
+{% load static %}
+{% block 'title' %} PRODUCTS {% endblock %}
+{% block 'slider' %}
+<section id="inner-headline">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<h2 class="pageTitle">PRODUCTS</h2>
+			</div>
+		</div>
+	</div>
+	</section>
+	<section id="content">
+		<div class="container content">		
+        <!-- Service Blcoks -->
+        <div class="row service-v1 margin-bottom-40">
+        	{% for items in records %}
+            <div class="col-md-4 md-margin-bottom-40"><br><br>
+                {% for pic in items.product_image_set.all %}
+               <div style="height:50px;width:50px;display: inline-block;">
+                    <img src="{{pic.img.url}}" alt="{{pic.img.url}}" class="img-responsive" style="height:50px;width:50px;">
+                </div>
+                {% endfor %}
+                 <img class="img-responsive" src="{{items.product_image_set.all.0.img.url}}" alt="" style="height:350px;width: 350px;">  
+                 <br>
+                <h2>{{items.pname}}</h2><br>
+                <p>{{items.s_decr}}</p><br>
+                 <a href="/product_details/{{items.slug}}" class="btn btn-info">Show Details</a>
+            </div>
+
+            {% endfor %}
+
+        <!-- End Service Blcoks -->
+
+        <!-- <hr class="margin-bottom-50"> -->
+
+        
+
+        
+    </div>
+    </section>
+{% endblock %}
